@@ -63,25 +63,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\CLAP\Core\Scripts\ClapBehaviour.cs" />
-    <Compile Include="Assets\CLAP\Core\Scripts\ClapBone.cs" />
-    <Compile Include="Assets\CLAP\Core\Scripts\ClapConfigSO.cs" />
-    <Compile Include="Assets\CLAP\Core\Scripts\CouplingProxy.cs" />
-    <Compile Include="Assets\CLAP\Core\Scripts\HandInstance.cs" />
-    <Compile Include="Assets\CLAP\Core\Scripts\IClapWrapper.cs" />
-    <Compile Include="Assets\CLAP\Core\Scripts\InteractionObject.cs" />
-    <Compile Include="Assets\CLAP\Core\Scripts\JointToggler.cs" />
-    <Compile Include="Assets\CLAP\Core\Scripts\MyMesh.cs" />
-    <Compile Include="Assets\CLAP\Core\Scripts\Native.cs" />
-    <Compile Include="Assets\CLAP\Core\Scripts\Utils\ClapCustomEvents.cs" />
-    <Compile Include="Assets\CLAP\Core\Scripts\Utils\ExtensionMethods.cs" />
-    <Compile Include="Assets\CLAP\Core\Scripts\Utils\ShowOnlyAttribute.cs" />
-    <Compile Include="Assets\CLAP\Core\Scripts\Utils\Tools.cs" />
-    <Compile Include="Assets\CLAP\Core\Scripts\Utils\UnitySystemConsoleRedirector.cs" />
-    <Compile Include="Assets\CLAP\Core\Scripts\vector3d-master\Mathd.cs" />
-    <Compile Include="Assets\CLAP\Core\Scripts\vector3d-master\Vector2d.cs" />
-    <Compile Include="Assets\CLAP\Core\Scripts\vector3d-master\Vector3d.cs" />
-    <Compile Include="Assets\CLAP\Core\Scripts\XRComponentEnabler.cs" />
     <Compile Include="Assets\LeapMotion\Core\Examples\Example Assets\InertiaPostProcessProvider.cs" />
     <Compile Include="Assets\LeapMotion\Core\Examples\Example Assets\ProjectionPostProcessProvider.cs" />
     <Compile Include="Assets\LeapMotion\Core\Plugins\LeapCSharp\Arm.cs" />
@@ -902,10 +883,8 @@
     <None Include="Assets\LeapMotion\Core\README_BEFORE_UPDATING.txt" />
     <None Include="Assets\SteamVR\Resources\SteamVR_ClearAll.shader" />
     <None Include="Assets\SteamVR\InteractionSystem\Hints\Shaders\ControllerButtonHints.shader" />
-    <None Include="Assets\CLAP\Core\Dlls\resources\fullhand\argv_hand.txt" />
     <None Include="Assets\Paint in 3D\Examples\Shaders\P3D Shield.shader" />
     <None Include="Assets\Paint in 3D\Shaders\Resources\P3D Sphere Triplanar.shader" />
-    <None Include="Assets\CLAP\Core\Dlls\resources\fullhand\fleshmodel.txt" />
     <None Include="Assets\VRTK\Documentation.txt" />
     <None Include="Assets\LeapMotion\Core\readme.txt" />
     <None Include="Assets\Paint in 3D\Shaders\Resources\P3D Sphere Blur.shader" />
@@ -915,18 +894,14 @@
     <None Include="Assets\VRTK\Source\Scripts\Internal\Shaders\VRTK_OutlineBasic.shader" />
     <None Include="Assets\VRTK\Source\Scripts\Internal\Shaders\AdaptiveQualityDebugVisualization.shader" />
     <None Include="Assets\LeapMotion\Core\Dependencies.txt" />
-    <None Include="Assets\CLAP\Core\Dlls\resources\fullhand\handmodel.txt" />
     <None Include="Assets\Little Pack 1\Shaders\Toony-BasicOutline.shader" />
     <None Include="Assets\LeapMotion\Core\Shaders\ThresholdOverlay.shader" />
-    <None Include="Assets\CLAP\ReadMe.txt" />
     <None Include="Assets\csc.rsp" />
-    <None Include="Assets\CLAP\Core\Dlls\resources\fullhand\handmodel_left.txt" />
     <None Include="Assets\UGUIMiniMap\Content\Documentation\ReadMe.txt" />
     <None Include="Assets\LeapMotion\Core\Shaders\PassthroughForeground.shader" />
     <None Include="Assets\Paint in 3D\Examples\Fonts\OFL.txt" />
     <None Include="Assets\UGUIMiniMap\Content\Art\Shader\OverAll.shader" />
     <None Include="Assets\Paint in 3D\Shaders\Resources\P3D Replace.shader" />
-    <None Include="Assets\CLAP\Core\Scripts\vector3d-master\Website.txt" />
     <None Include="Assets\LeapMotion\Core\Shaders\PassthroughBackground.shader" />
     <None Include="Assets\Paint in 3D\Shaders\Resources\P3D Decal.shader" />
     <None Include="Assets\Paint in 3D\Examples\Shaders\P3D UV2 Cutoff.shader" />
@@ -938,7 +913,6 @@
     <None Include="Assets\SteamVR\Resources\SteamVR_SphericalProjection.shader" />
     <None Include="Assets\LeapMotion\Core\Version.txt" />
     <None Include="Assets\SteamVR\Resources\SteamVR_AlphaOut.shader" />
-    <None Include="Assets\CLAP\Core\Dlls\resources\fullhand\skinmodel.txt" />
     <None Include="Assets\VRTK\Source\Scripts\Internal\Shaders\TransparentFresnelBehind.shader" />
     <None Include="Assets\LeapMotion\Core\Shaders\VertexOffsetShader.shader" />
     <None Include="Assets\SteamVR\readme.txt" />
@@ -948,7 +922,6 @@
     <None Include="Assets\SteamVR\Resources\SteamVR_ColorOut.shader" />
     <None Include="Assets\SteamVR\InteractionSystem\Core\Shaders\SeeThru.shader" />
     <None Include="Assets\Paint in 3D\Examples\Shaders\P3D UV2.shader" />
-    <None Include="Assets\CLAP\Core\Dlls\resources\fullhand\fleshmodel_left.txt" />
     <None Include="Assets\SteamVR\InteractionSystem\Readme_InteractionSystem.txt" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/Unity_WorkSpace/Leapmotion_Study/Kid_E/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

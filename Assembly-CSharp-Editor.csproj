@@ -63,8 +63,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\CLAP\Core\Scripts\Editor\InteractionObject_Editor.cs" />
-    <Compile Include="Assets\CLAP\Core\Scripts\Utils\Editor\InspectorTools.cs" />
     <Compile Include="Assets\LeapMotion\Core\Editor\CorePreferences.cs" />
     <Compile Include="Assets\LeapMotion\Core\Editor\CustomEditorBase.cs" />
     <Compile Include="Assets\LeapMotion\Core\Editor\CustomPropertyDrawerBase.cs" />

@@ -32,6 +32,6 @@ public class MainGameManager : GameManagerBase
     }
     protected override void InitGameObject()
     {
-        
+        paintTargetObjs = GameObject.FindGameObjectsWithTag("PaintTarget");
     }
 }
