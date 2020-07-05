@@ -1,0 +1,137 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using GameFramework.Event;
+using UnityEngine;
+using UnityGameFramework.Runtime;
+using static Constant.NumRecGuide;
+
+/*
+ * 注释：引导事件处理类
+ */
+public class MusicPlay : MonoBehaviourSingle<MusicPlay>
+{
+    private int m_StepId = -1;
+    private bool m_IsMusicPlayOver = false;
+
+    [HideInInspector]
+    public int MusicSerialId = -1; //音乐加载后的序列编号
+    private List<object> m_LoadedAssets = new List<object>();//需要操作流程控制的实体列表。
+
+    /// <summary>
+    /// 自身的初始化操作
+    /// </summary>
+    public void OnInitial()
+    {
+        GameEntry.Event.Subscribe(PlaySoundSuccessEventArgs.EventId, OnSoundPlaySuccess);
+        GameEntry.Event.Subscribe(PlaySoundFailureEventArgs.EventId, OnSoundPlayFailure);
+
+        int tempStepId = -1;
+        tempStepId = NumRecGuideManager.GetInstance().GetCurStep();
+        m_StepId = tempStepId;
+        if (tempStepId != -1)
+        {
+            //直接播放了第一段音频，现在确认之前的stepid的success是什么时候呗设定为true的
+            NumRecGuideManager.GetInstance().ShowStepDescriptionAndPlayMusic(tempStepId);
+        }
+    }
+
+    private void OnSoundPlayFailure(object sender, GameEventArgs e)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OnClose()
+    {
+        m_IsMusicPlayOver = false;
+
+        if (MusicSerialId != -1)
+        {
+            GameEntry.Sound.StopSound(MusicSerialId);
+            MusicSerialId = -1;
+        }
+        if (GameEntry.Event.Check(PlaySoundSuccessEventArgs.EventId, OnSoundPlaySuccess))
+        {
+            GameEntry.Event.Unsubscribe(PlaySoundSuccessEventArgs.EventId, OnSoundPlaySuccess);
+        }
+
+        if (GameEntry.Event.Check(PlaySoundFailureEventArgs.EventId, OnSoundPlayFailure))
+        {
+            GameEntry.Event.Unsubscribe(PlaySoundFailureEventArgs.EventId, OnSoundPlayFailure);
+        }
+    }
+
+    public override void Clear()
+    {
+        base.Clear();
+
+        if (m_LoadedAssets != null && m_LoadedAssets.Count > 0)
+        {
+            for (int i = 0; i < m_LoadedAssets.Count; i++)
+            {
+                GameEntry.Resource.UnloadAsset(m_LoadedAssets[i]);
+            }
+
+            m_LoadedAssets.Clear();
+        }
+    }
+
+    private void OnSoundPlaySuccess(object sender, GameEventArgs e)
+    {
+        PlaySoundSuccessEventArgs se = e as PlaySoundSuccessEventArgs;
+        if (se == null)
+        {
+            return;
+        }
+
+        if (se.SoundAgent.SoundGroup.Name == "Element")
+        {
+            MusicSerialId = se.SoundAgent.SerialId;
+            float time = se.SoundAgent.Length + 1.5f;
+
+            int stepId = NumRecGuideManager.GetInstance().GetCurStep();
+
+            if (stepId != -1)
+            {
+                //做气泡的信息填充
+            }
+            StartCoroutine("MusicPlayOver", time);
+        }
+    }
+
+    private IEnumerator MusicPlayOver(float time)
+    {
+        yield return new WaitForSecondsRealtime(time);
+        int stepId = NumRecGuideManager.GetInstance().GetCurStep();
+        m_IsMusicPlayOver = true;
+        IsCurrentStepOver();
+    }
+
+    private void IsCurrentStepOver()
+    {
+        if (m_IsMusicPlayOver)//在这里添加其他条件：是否显示UI挂件或者按钮点击显示地图
+        {
+            PushEventNow();
+        }
+    }
+    //触发相应的音乐播放事件
+    private void PushEventNow()
+    {
+        m_StepId = NumRecGuideManager.GetInstance().GetCurStep();
+        StepEventArgs e = new StepEventArgs();
+        e.Sender = null;
+
+        if (m_StepId == 1)
+        {
+            e.StepCorrectId = NumRecGuideCorrectionType.StartMusic;
+            StepEvent.PushEvent((int)NumRecGuideType.ParamNone, e);
+            m_IsMusicPlayOver = false;
+
+            m_StepId = NumRecGuideManager.GetInstance().GetCurStep();
+            if (m_StepId != -1)
+            {
+                NumRecGuideManager.GetInstance().ShowStepDescriptionAndPlayMusic(m_StepId);
+            }
+        }
+    }
+}
