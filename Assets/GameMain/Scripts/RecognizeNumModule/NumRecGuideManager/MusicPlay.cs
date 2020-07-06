@@ -13,6 +13,10 @@ public class MusicPlay : MonoBehaviourSingle<MusicPlay>
 {
     private int m_StepId = -1;
     private bool m_IsMusicPlayOver = false;
+    [HideInInspector]
+    public bool m_IsHandShow = false;
+    [HideInInspector]
+    public bool m_IsUIShow = false;
 
     [HideInInspector]
     public int MusicSerialId = -1; //音乐加载后的序列编号
@@ -103,18 +107,34 @@ public class MusicPlay : MonoBehaviourSingle<MusicPlay>
     {
         yield return new WaitForSecondsRealtime(time);
         int stepId = NumRecGuideManager.GetInstance().GetCurStep();
+        
         m_IsMusicPlayOver = true;
         IsCurrentStepOver();
     }
 
-    private void IsCurrentStepOver()
+    public void IsCurrentStepOver()
     {
-        if (m_IsMusicPlayOver)//在这里添加其他条件：是否显示UI挂件或者按钮点击显示地图
+        int stepId = NumRecGuideManager.GetInstance().GetCurStep();
+        if (stepId == 1)
         {
             PushEventNow();
         }
+        else if (stepId == 2)
+        {
+            if (m_IsMusicPlayOver && m_IsHandShow)//在这里添加其他条件：是否显示UI挂件或者按钮点击显示地图
+            {
+                PushEventNow();
+            }
+        }
+        else if (stepId == 3)
+        {
+            if ((m_IsMusicPlayOver && m_IsUIShow))
+            {
+                PushEventNow();
+            }
+        }
     }
-    //触发相应的音乐播放事件
+    //先更新引导状态表，再触发下一次音乐播放
     private void PushEventNow()
     {
         m_StepId = NumRecGuideManager.GetInstance().GetCurStep();
@@ -126,7 +146,36 @@ public class MusicPlay : MonoBehaviourSingle<MusicPlay>
             e.StepCorrectId = NumRecGuideCorrectionType.StartMusic;
             StepEvent.PushEvent((int)NumRecGuideType.ParamNone, e);
             m_IsMusicPlayOver = false;
+            m_IsHandShow = false;
+            //播放下一项音乐
+            m_StepId = NumRecGuideManager.GetInstance().GetCurStep();
+            if (m_StepId != -1)
+            {
+                NumRecGuideManager.GetInstance().ShowStepDescriptionAndPlayMusic(m_StepId);
+            }
+        }
+        else if (m_StepId == 2)
+        {
+            e.StepCorrectId = NumRecGuideCorrectionType.InteractGuide;
+            StepEvent.PushEvent((int)NumRecGuideType.ParamNone, e);
+            m_IsMusicPlayOver = false;
+            m_IsHandShow = false;
 
+            //播放下一项音乐
+            m_StepId = NumRecGuideManager.GetInstance().GetCurStep();
+            if (m_StepId != -1)
+            {
+                NumRecGuideManager.GetInstance().ShowStepDescriptionAndPlayMusic(m_StepId);
+            }
+        }
+        else if (m_StepId == 3)
+        {
+            e.StepCorrectId = NumRecGuideCorrectionType.UIBtnGuide;
+            StepEvent.PushEvent((int)NumRecGuideType.ParamNone, e);
+            m_IsMusicPlayOver = false;
+            m_IsHandShow = false;
+
+            //播放下一项音乐
             m_StepId = NumRecGuideManager.GetInstance().GetCurStep();
             if (m_StepId != -1)
             {

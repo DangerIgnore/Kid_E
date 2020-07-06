@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MiniMapManager : MonoBehaviour
+public class MiniMapManager : MonoBehaviourSingle<MiniMapManager>
 {
     // Start is called before the first frame update
     Transform miniMapRoot;

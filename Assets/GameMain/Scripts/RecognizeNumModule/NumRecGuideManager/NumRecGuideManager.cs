@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Leap.Unity.Animation;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -134,9 +135,12 @@ public class NumRecGuideManager : QSingleton<NumRecGuideManager>
             }
             break;
         }
-        UpdateCurStepPointer(currentStepId);
+        UpdateCurStepPointerPratice(currentStepId);
     }
-    private void UpdateCurStepPointer(int currentStepId)
+    /// <summary>
+    /// 更新当前步骤指针活动要求
+    /// </summary>
+    private void UpdateCurStepPointerPratice(int currentStepId)
     {
         if(CurStepSet == null)
         {
@@ -154,6 +158,12 @@ public class NumRecGuideManager : QSingleton<NumRecGuideManager>
                     {
                         item.StepId = CurStepSet[nextStepId].StepId;
                         //气泡文字内容填充(暂时不做)
+                        if(item.StepId == 2)
+                        {
+                            LeftHand_Guide.GetInstance().mIsLighting = true;
+                            RightHand_Guide.GetInstance().mIsLighting = true;
+
+                        }
                     }
                 }
             }

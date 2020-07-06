@@ -80,9 +80,11 @@
     <Compile Include="Assets\GameMain\Scripts\RecognizeNumModule\Base\MonoBehaviourSingle.cs" />
     <Compile Include="Assets\GameMain\Scripts\RecognizeNumModule\Base\PropsDataManager.cs" />
     <Compile Include="Assets\GameMain\Scripts\RecognizeNumModule\Base\QSingleton.cs" />
+    <Compile Include="Assets\GameMain\Scripts\RecognizeNumModule\NumRecGuideManager\LeftHand_Guide.cs" />
     <Compile Include="Assets\GameMain\Scripts\RecognizeNumModule\NumRecGuideManager\MusicPlay.cs" />
     <Compile Include="Assets\GameMain\Scripts\RecognizeNumModule\NumRecGuideManager\NumRecGuideManager.cs" />
     <Compile Include="Assets\GameMain\Scripts\RecognizeNumModule\NumRecGuideManager\NumRecGuideStepInfo.cs" />
+    <Compile Include="Assets\GameMain\Scripts\RecognizeNumModule\NumRecGuideManager\RightHand_Guide.cs" />
     <Compile Include="Assets\GameMain\Scripts\RecognizeNumModule\NumRecGuideManager\StepEvent.cs" />
     <Compile Include="Assets\GameMain\Scripts\Utility\AssetUtility.cs" />
     <Compile Include="Assets\LeapMotion\Core\Examples\Example Assets\InertiaPostProcessProvider.cs" />

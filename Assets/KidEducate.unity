@@ -16896,6 +16896,7 @@ GameObject:
   - component: {fileID: 728739922948738676}
   - component: {fileID: 781318979385370906}
   - component: {fileID: 781731667707708708}
+  - component: {fileID: 813828609232323141}
   m_Layer: 0
   m_Name: LoPoly Rigged Hand Left
   m_TagString: Untagged
@@ -16903,6 +16904,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &813828609232323141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813828609232323140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b464788e8e591e4ca4f53d827bcfca5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mHead: {fileID: 814947533258085853}
+  mLeftHand: {fileID: 0}
+  m_count: 0
+  mIsLighting: 0
 --- !u!1 &813830038836280764
 GameObject:
   m_ObjectHideFlags: 0
@@ -17186,6 +17203,7 @@ GameObject:
   - component: {fileID: 728384336552715899}
   - component: {fileID: 782121109698478813}
   - component: {fileID: 781687175179427121}
+  - component: {fileID: 813949994697504496}
   m_Layer: 0
   m_Name: LoPoly Rigged Hand Right
   m_TagString: Untagged
@@ -17193,6 +17211,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &813949994697504496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813949994697504495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4fd3b656227479498c1326ffe9139b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mHead: {fileID: 814947533258085853}
+  mRightHand: {fileID: 0}
+  m_count: 0
+  mIsLighting: 0
 --- !u!1 &813952460241692260
 GameObject:
   m_ObjectHideFlags: 0
