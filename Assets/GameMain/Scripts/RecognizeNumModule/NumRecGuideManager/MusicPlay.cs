@@ -17,6 +17,10 @@ public class MusicPlay : MonoBehaviourSingle<MusicPlay>
     public bool m_IsHandShow = false;
     [HideInInspector]
     public bool m_IsUIShow = false;
+    [HideInInspector]
+    public bool m_IsclickMapBtn = false;
+    [HideInInspector]
+    public bool m_IsMoved = false;
 
     [HideInInspector]
     public int MusicSerialId = -1; //音乐加载后的序列编号
@@ -42,7 +46,12 @@ public class MusicPlay : MonoBehaviourSingle<MusicPlay>
 
     private void OnSoundPlayFailure(object sender, GameEventArgs e)
     {
-        throw new NotImplementedException();
+        Debug.Log("Music failure");
+        PlaySoundFailureEventArgs se = e as PlaySoundFailureEventArgs;
+        if (se == null)
+        {
+            return;
+        }
     }
 
     public void OnClose()
@@ -107,7 +116,7 @@ public class MusicPlay : MonoBehaviourSingle<MusicPlay>
     {
         yield return new WaitForSecondsRealtime(time);
         int stepId = NumRecGuideManager.GetInstance().GetCurStep();
-        
+
         m_IsMusicPlayOver = true;
         IsCurrentStepOver();
     }
@@ -133,6 +142,27 @@ public class MusicPlay : MonoBehaviourSingle<MusicPlay>
                 PushEventNow();
             }
         }
+        else if (stepId == 4)
+        {
+            if (m_IsMusicPlayOver)
+            {
+                PushEventNow();
+            }
+        }
+        else if (stepId == 5)
+        {
+            if (m_IsMusicPlayOver && m_IsclickMapBtn)
+            {
+                PushEventNow();
+            }
+        }
+        else if (stepId == 6)
+        {
+            if (m_IsMusicPlayOver && m_IsMoved)
+            {
+                PushEventNow();
+            }
+        }
     }
     //先更新引导状态表，再触发下一次音乐播放
     private void PushEventNow()
@@ -147,12 +177,8 @@ public class MusicPlay : MonoBehaviourSingle<MusicPlay>
             StepEvent.PushEvent((int)NumRecGuideType.ParamNone, e);
             m_IsMusicPlayOver = false;
             m_IsHandShow = false;
-            //播放下一项音乐
-            m_StepId = NumRecGuideManager.GetInstance().GetCurStep();
-            if (m_StepId != -1)
-            {
-                NumRecGuideManager.GetInstance().ShowStepDescriptionAndPlayMusic(m_StepId);
-            }
+
+            PlayMusicByCurStep();
         }
         else if (m_StepId == 2)
         {
@@ -161,26 +187,54 @@ public class MusicPlay : MonoBehaviourSingle<MusicPlay>
             m_IsMusicPlayOver = false;
             m_IsHandShow = false;
 
-            //播放下一项音乐
-            m_StepId = NumRecGuideManager.GetInstance().GetCurStep();
-            if (m_StepId != -1)
-            {
-                NumRecGuideManager.GetInstance().ShowStepDescriptionAndPlayMusic(m_StepId);
-            }
+            PlayMusicByCurStep();
         }
         else if (m_StepId == 3)
         {
             e.StepCorrectId = NumRecGuideCorrectionType.UIBtnGuide;
             StepEvent.PushEvent((int)NumRecGuideType.ParamNone, e);
             m_IsMusicPlayOver = false;
-            m_IsHandShow = false;
 
-            //播放下一项音乐
-            m_StepId = NumRecGuideManager.GetInstance().GetCurStep();
-            if (m_StepId != -1)
-            {
-                NumRecGuideManager.GetInstance().ShowStepDescriptionAndPlayMusic(m_StepId);
-            }
+            PlayMusicByCurStep();
+        }
+        else if (m_StepId == 4)
+        {
+            //通过事件更新状态表 
+            e.StepCorrectId = NumRecGuideCorrectionType.UIDescripte;
+            StepEvent.PushEvent((int)NumRecGuideType.ParamNone, e);
+            m_IsMusicPlayOver = false;
+            //根据最新状态表播放音乐
+            PlayMusicByCurStep();
+        }
+        else if (m_StepId == 5)
+        {
+            //通过事件更新状态表 
+            e.StepCorrectId = NumRecGuideCorrectionType.OpenMap;
+            StepEvent.PushEvent((int)NumRecGuideType.ParamNone, e);
+            m_IsMusicPlayOver = false;
+            m_IsclickMapBtn = false;
+            //根据最新状态表播放音乐
+            PlayMusicByCurStep();
+        }
+        else if (m_StepId == 6)
+        {
+            //通过事件更新状态表 
+            e.StepCorrectId = NumRecGuideCorrectionType.MoveGuide;
+            StepEvent.PushEvent((int)NumRecGuideType.ParamNone, e);
+            m_IsMusicPlayOver = false;
+            m_IsMoved = false;
+            //根据最新状态表播放音乐
+            PlayMusicByCurStep();
+        }
+    }
+
+    private void PlayMusicByCurStep()
+    {
+        //播放下一项音乐
+        m_StepId = NumRecGuideManager.GetInstance().GetCurStep();
+        if (m_StepId != -1)
+        {
+            NumRecGuideManager.GetInstance().ShowStepDescriptionAndPlayMusic(m_StepId);
         }
     }
 }

@@ -7,11 +7,13 @@ using UnityEngine;
 ///summary
 ///刷子脚本，当刷子接触可绘制物体，在接触点生成贴花预制体。
 ///summary
-public class Brush : MonoBehaviour
+public class Brush : MonoBehaviourSingle<Brush>
 {
     public float density = 20;
     private int delayTimes = 0;
     Vector3 Oripos;//初始位置记录，用于移动监测
+    private WriteLines two = null;
+
     public enum PaintState
     {
         clear,
@@ -30,7 +32,11 @@ public class Brush : MonoBehaviour
         paintState = PaintState.white;
         Oripos = this.transform.localPosition;
     }
-
+    private void Start()
+    {
+        //加载需要的路线
+        two = GameObject.Find("WriteLineTwo").GetComponent<WriteLines>();
+    }
     public bool IsStatic()
     {
         var d = Vector3.SqrMagnitude(Oripos - transform.localPosition);
@@ -55,10 +61,24 @@ public class Brush : MonoBehaviour
         {
             Painting(collision);
         }
-
+        
         //Debug.Log("create!");
     }
-
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "DrawLine")
+        {
+            string parentName = other.transform.parent.name;
+            string nodeName = other.name;
+            other.gameObject.GetComponent<HighlightAuto>().EdgeLightingConstanting(false, Color.green);
+            if(parentName == "WriteLineTwo")//与数字2触发
+            {
+                HighlightInfo info = null;
+                two.triggerList.TryGetValue(int.Parse(nodeName), out info);
+                info.m_IsActive = false;
+            }
+        }
+    }
     private void Painting(Collision collision)
     {
         Vector3 position = new Vector3();//记录碰撞的中间点位置

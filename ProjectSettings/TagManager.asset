@@ -14,6 +14,9 @@ TagManager:
   - PaintPoint
   - DrawLine
   - PaintTaget
+  - StelaOne
+  - StelaTwo
+  - StelaThree
   layers:
   - Default
   - TransparentFX

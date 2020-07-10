@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\HighlightingSystem\Editor\HighlightingSystemEditor.cs" />
     <Compile Include="Assets\LeapMotion\Core\Editor\CorePreferences.cs" />
     <Compile Include="Assets\LeapMotion\Core\Editor\CustomEditorBase.cs" />
     <Compile Include="Assets\LeapMotion\Core\Editor\CustomPropertyDrawerBase.cs" />

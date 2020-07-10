@@ -625,7 +625,6 @@ namespace UnityGameFramework.Runtime
                     soundAgentHelper.SetWorldPosition(playSoundInfo.WorldPosition);
                 }
             }
-
             m_EventComponent.Fire(this, PlaySoundSuccessEventArgs.Create(e));
         }
 

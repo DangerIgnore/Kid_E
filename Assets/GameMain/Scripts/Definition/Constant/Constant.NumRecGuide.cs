@@ -24,8 +24,9 @@ public static partial class Constant
             InteractGuide = 2,
             UIBtnGuide = 3, 
             UIDescripte = 4,
-
-
+            OpenMap = 5,
+            MoveGuide = 6,
+            FindItem =7,
         }
     }
 }

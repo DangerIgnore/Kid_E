@@ -30,7 +30,7 @@ public class NumRecGuideManager : QSingleton<NumRecGuideManager>
         StepEvent.UnRegEvent((int)NumRecGuideType.ParamNone, OnTaskStep);
         MusicPlay.GetInstance().OnClose();
     }
-
+    //获取正确引导状态表
     private void LoadCurTaskStepTable()
     {
         List<NumRecGuideInfo> NumRecGuideInfoData = PropsDataManager.NumRecGuideInfoData.GetAllNumRecGuideData();
@@ -100,7 +100,6 @@ public class NumRecGuideManager : QSingleton<NumRecGuideManager>
     /// <param name="e"></param>
     private void UpdateNumRecGuideStateTable(int stepCorrectId, int eventTypeId, StepEventArgs e)
     {
-        //Debug.Log("更新认识数字引导步骤");
         int currentStepId = 0;
         if(CurStepSet == null)
         {
@@ -138,7 +137,7 @@ public class NumRecGuideManager : QSingleton<NumRecGuideManager>
         UpdateCurStepPointerPratice(currentStepId);
     }
     /// <summary>
-    /// 更新当前步骤指针活动要求
+    /// 更新当前步骤指针活动要求，需要特殊要求的参数信息，再这里补充
     /// </summary>
     private void UpdateCurStepPointerPratice(int currentStepId)
     {
@@ -162,8 +161,12 @@ public class NumRecGuideManager : QSingleton<NumRecGuideManager>
                         {
                             LeftHand_Guide.GetInstance().mIsLighting = true;
                             RightHand_Guide.GetInstance().mIsLighting = true;
-
                         }
+                        if(item.StepId == 5)
+                        {
+                            MiniMapManager.GetInstance().m_IsStartChange = true;
+                        }
+                        
                     }
                 }
             }

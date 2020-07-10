@@ -4,20 +4,20 @@ using System.Collections.Generic;
 using Leap;
 using Leap.Unity;
 using UnityEngine;
- 
+
 public class GestureTest : MonoBehaviour
 {
 
     public float DisFromHandAndHead;
     private Transform HandFollow;
-
+    private float m_Timer = 0;
     public Transform player;
     /// <summary>
     /// 方向 
     /// </summary>
     public Transform dic;
     public Transform leftShoulderPos;
-
+    private bool MoveStart = true;
     /// <summary>
     /// 速度
     /// </summary>
@@ -26,13 +26,14 @@ public class GestureTest : MonoBehaviour
     public float ShowDelta;
     public HandModelBase leftHandModel;
     public Hand leftHand;
+
     [Tooltip("Velocity (m/s) move toward ")]
     protected float deltaVelocity = 0.7f;
     //这里传进来你要打开的手指 紧握手指 {} 传一个手指{Finger.FingerType.TYPE_RING}...以此类推，当传进5个值得时候代表 手张开，当传进0个值的时候代表 握手
     Finger.FingerType[] OK = { Finger.FingerType.TYPE_THUMB };
     Finger.FingerType[] arr1 = { Finger.FingerType.TYPE_INDEX };
     Finger.FingerType[] Yeah = { Finger.FingerType.TYPE_INDEX, Finger.FingerType.TYPE_MIDDLE };
-    Finger.FingerType[] FullOpen = { Finger.FingerType.TYPE_INDEX, Finger.FingerType.TYPE_MIDDLE, 
+    Finger.FingerType[] FullOpen = { Finger.FingerType.TYPE_INDEX, Finger.FingerType.TYPE_MIDDLE,
         Finger.FingerType.TYPE_PINKY, Finger.FingerType.TYPE_RING, Finger.FingerType.TYPE_THUMB };
 
 
@@ -44,15 +45,16 @@ public class GestureTest : MonoBehaviour
     }
     private void Start()
     {
-        
+
     }
     // Update is called once per frame
     void FixedUpdate()
     {
 
-        if (!leftHandModel.IsTracked) {
+        if (!leftHandModel.IsTracked)
+        {
             return;
-        } 
+        }
         leftHand = leftHandModel.GetLeapHand();
         DisFromHandAndHead = (leftHand.PalmPosition.ToVector3() - leftShoulderPos.position).magnitude;
         showdelat = ShowDelta;
@@ -71,7 +73,7 @@ public class GestureTest : MonoBehaviour
             brush.paintState = Brush.PaintState.clear;
             Debug.Log("PaintState.clear");
         }*/
-        
+
         //if (IsMoveLeft(leftHand))
         //{
         //    print("左手向左滑动");
@@ -102,11 +104,27 @@ public class GestureTest : MonoBehaviour
         //    print("四指指向掌心");
         //}
 
-        if (CheckFingerOpenToHand(leftHand, OK) && (DisFromHandAndHead > 0.4f)&& isSameDirection(dic.forward, leftHand.Direction))
+        if (CheckFingerOpenToHand(leftHand, OK) && (DisFromHandAndHead > 0.4f) && isSameDirection(dic.forward, leftHand.Direction))
         {
-            player.Translate(dic.forward * Time.deltaTime * speed* (DisFromHandAndHead - 0.4f) /(0.8f- DisFromHandAndHead));
+            player.Translate(dic.forward * Time.deltaTime * speed * (DisFromHandAndHead - 0.4f) / (0.8f - DisFromHandAndHead));
             HandFollow.transform.position = player.transform.position;
             HandFollow.transform.rotation = player.transform.rotation;
+
+            if (MoveStart)
+            {
+                //print(m_Timer);
+                m_Timer += Time.deltaTime;
+                if (m_Timer > 1.5f)
+                {
+                    MusicPlay.GetInstance().m_IsMoved = true;
+                    m_Timer = 0;
+                    MusicPlay.GetInstance().IsCurrentStepOver();
+                    MoveStart = false;
+                }
+            }
+            
+
+
             //Debug.Log("(" + player.position.x + "," + player.position.y + "," + player.position.x + ")");
         }
     }
@@ -202,8 +220,8 @@ public class GestureTest : MonoBehaviour
     }
     public bool IsLeftHandOpenFullIT()
     {
-       return CheckFingerOpenToHand(leftHand, FullOpen,0.08f);
-        
+        return CheckFingerOpenToHand(leftHand, FullOpen, 0.08f);
+
     }
     /// <summary>
     /// 手滑向左边
@@ -279,7 +297,7 @@ public class GestureTest : MonoBehaviour
     /// <param name="a">向量1</param>
     /// <param name="b">向量2</param>
     /// <returns></returns>
-    protected float angle2LeapVectors(Leap.Vector a,Leap.Vector b)
+    protected float angle2LeapVectors(Leap.Vector a, Leap.Vector b)
     {
         //向量转化成角度
         return Vector3.Angle(UnityVectorExtension.ToVector3(a), UnityVectorExtension.ToVector3(b));
@@ -289,7 +307,7 @@ public class GestureTest : MonoBehaviour
         //向量转化成角度
         return Vector3.Angle(a, UnityVectorExtension.ToVector3(b));
     }
-    protected bool isSameDirection(Vector3 a,Vector b)
+    protected bool isSameDirection(Vector3 a, Vector b)
     {
         float handForwardDegree = 50f;
         //Debug.Log(angle2LeapVectors(a, b));

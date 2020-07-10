@@ -8,6 +8,8 @@ public class MiniMapManager : MonoBehaviourSingle<MiniMapManager>
     // Start is called before the first frame update
     Transform miniMapRoot;
     bool state = false;
+    [HideInInspector]
+    public bool m_IsStartChange = false;
     private bool begining = true;
     private GameObject[] mapBtnImgs;
     private Brush brush;
@@ -34,7 +36,12 @@ public class MiniMapManager : MonoBehaviourSingle<MiniMapManager>
         }
         miniMapRoot.gameObject.GetComponent<Canvas>().enabled = state;
         state = !state;
-
+        if (m_IsStartChange)
+        {
+            MusicPlay.GetInstance().m_IsclickMapBtn = true;
+            MusicPlay.GetInstance().IsCurrentStepOver();
+            m_IsStartChange = false;
+        }
     }
     public void changeBrushColor()
     {

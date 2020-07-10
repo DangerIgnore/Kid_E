@@ -23,13 +23,18 @@ public class LeftHand_Guide : MonoBehaviourSingle<LeftHand_Guide>
     private void Start()
     {
         mLeftHand = gameObject;
+        //mHead = GameObject.Find("Leap Rig").transform.GetChild(0).gameObject;
+        mIsLighting = false;
     }
 
     private void FixedUpdate()
     {
-        print(Vector3.Distance(gameObject.transform.position, mHead.transform.position));
-        if (mIsLighting && mHead != null && Vector3.Distance(gameObject.transform.position, mHead.transform.position) < 1.25f)
+        if (mHead == null) print("head null");
+        if (mLeftHand == null) print("hand null");
+
+         if (mIsLighting && mHead != null && Vector3.Distance(mLeftHand.transform.position, mHead.transform.position) < 1.5f)
         {
+            //print(Vector3.Distance(gameObject.transform.position, mHead.transform.position));
             int stepId = NumRecGuideManager.GetInstance().GetCurStep();
             if (stepId == 2)
             {

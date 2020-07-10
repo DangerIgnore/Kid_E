@@ -63,6 +63,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\GameMain\Highlight\HighlightAuto.cs" />
+    <Compile Include="Assets\GameMain\Highlight\HighlightCtrl.cs" />
+    <Compile Include="Assets\GameMain\Highlight\HighlightManual.cs" />
     <Compile Include="Assets\GameMain\Scripts\Base\GameEntry.Builtin.cs" />
     <Compile Include="Assets\GameMain\Scripts\Base\GameEntry.cs" />
     <Compile Include="Assets\GameMain\Scripts\DataTable\DRNumRecGuideInfo.cs" />
@@ -87,6 +90,10 @@
     <Compile Include="Assets\GameMain\Scripts\RecognizeNumModule\NumRecGuideManager\RightHand_Guide.cs" />
     <Compile Include="Assets\GameMain\Scripts\RecognizeNumModule\NumRecGuideManager\StepEvent.cs" />
     <Compile Include="Assets\GameMain\Scripts\Utility\AssetUtility.cs" />
+    <Compile Include="Assets\GameMain\Scripts\WriteLines.cs" />
+    <Compile Include="Assets\HighlightingSystem\Scripts\HighlightableObject.cs" />
+    <Compile Include="Assets\HighlightingSystem\Scripts\HighlightingEffect.cs" />
+    <Compile Include="Assets\HighlightingSystem\Scripts\IgnoreHighLight.cs" />
     <Compile Include="Assets\LeapMotion\Core\Examples\Example Assets\InertiaPostProcessProvider.cs" />
     <Compile Include="Assets\LeapMotion\Core\Examples\Example Assets\ProjectionPostProcessProvider.cs" />
     <Compile Include="Assets\LeapMotion\Core\Plugins\LeapCSharp\Arm.cs" />
@@ -515,6 +522,7 @@
     <Compile Include="Assets\SteamVR\Scripts\SteamVR_TrackedObject.cs" />
     <Compile Include="Assets\SteamVR\Scripts\SteamVR_UpdatePoses.cs" />
     <Compile Include="Assets\SteamVR\Scripts\SteamVR_Utils.cs" />
+    <Compile Include="Assets\testHighlight.cs" />
     <Compile Include="Assets\UGUIMiniMap\Content\Scripts\Core\bl_IconItem.cs" />
     <Compile Include="Assets\UGUIMiniMap\Content\Scripts\Core\bl_MiniMap.cs" />
     <Compile Include="Assets\UGUIMiniMap\Content\Scripts\Core\bl_MiniMapItem.cs" />
@@ -880,6 +888,7 @@
     <Compile Include="Assets\VRTK\Source\SDK\Ximmerse\SDK_XimmerseDefines.cs" />
     <Compile Include="Assets\VRTK\Source\SDK\Ximmerse\SDK_XimmerseHeadset.cs" />
     <Compile Include="Assets\VRTK\Source\SDK\Ximmerse\SDK_XimmerseSystem.cs" />
+    <None Include="Assets\GameMain\Materials\StandBianYuanFaGuang.shader" />
     <None Include="Assets\Little Pack 1\Shaders\Toony-Basic.shader" />
     <None Include="Assets\SteamVR\Resources\SteamVR_Fade.shader" />
     <None Include="Assets\LeapMotion\Core\Resources\LeapCG.cginc" />
@@ -894,16 +903,22 @@
     <None Include="Assets\VRTK\Documentation.txt" />
     <None Include="Assets\LeapMotion\Core\readme.txt" />
     <None Include="Assets\Paint in 3D\Shaders\Resources\P3D Sphere Blur.shader" />
+    <None Include="Assets\HighlightingSystem\Resources\HighlightingBlur.shader" />
     <None Include="Assets\LeapMotion\Core\Shaders\RuntimeGizmos.shader" />
+    <None Include="Assets\HighlightingSystem\Resources\HighlightingStencilTransparent.shader" />
     <None Include="Assets\VRTK\Source\Scripts\Internal\Shaders\UIOverlay.shader" />
     <None Include="Assets\SteamVR\InteractionSystem\Teleport\Shaders\Highlight.shader" />
     <None Include="Assets\VRTK\Source\Scripts\Internal\Shaders\VRTK_OutlineBasic.shader" />
     <None Include="Assets\GameMain\DataTables\NumRecGuideInfo.txt" />
+    <None Include="Assets\HighlightingSystem\Resources\HighlightingInclude.cginc" />
     <None Include="Assets\VRTK\Source\Scripts\Internal\Shaders\AdaptiveQualityDebugVisualization.shader" />
+    <None Include="Assets\GameMain\Materials\BianYuanFaGuang.shader" />
     <None Include="Assets\LeapMotion\Core\Dependencies.txt" />
+    <None Include="Assets\HighlightingSystem\Resources\HighlightingComposite.shader" />
     <None Include="Assets\Little Pack 1\Shaders\Toony-BasicOutline.shader" />
     <None Include="Assets\LeapMotion\Core\Shaders\ThresholdOverlay.shader" />
     <None Include="Assets\csc.rsp" />
+    <None Include="Assets\HighlightingSystem\Resources\HighlightingStencilOpaqueZ.shader" />
     <None Include="Assets\UGUIMiniMap\Content\Documentation\ReadMe.txt" />
     <None Include="Assets\LeapMotion\Core\Shaders\PassthroughForeground.shader" />
     <None Include="Assets\Paint in 3D\Examples\Fonts\OFL.txt" />
@@ -913,6 +928,7 @@
     <None Include="Assets\Paint in 3D\Shaders\Resources\P3D Decal.shader" />
     <None Include="Assets\Paint in 3D\Examples\Shaders\P3D UV2 Cutoff.shader" />
     <None Include="Assets\Paint in 3D\Examples\Shaders\P3D Skybox.shader" />
+    <None Include="Assets\HighlightingSystem\Resources\HighlightingStencilOpaque.shader" />
     <None Include="Assets\Paint in 3D\Shaders\Resources\P3D Fill.shader" />
     <None Include="Assets\Paint in 3D\Examples\Shaders\P3D Dual Sided.shader" />
     <None Include="Assets\VRTK\Source\Scripts\Internal\Shaders\VRTK_TunnelEffect.shader" />
@@ -927,6 +943,7 @@
     <None Include="Assets\SteamVR\InteractionSystem\Core\Shaders\Silhouette.shader" />
     <None Include="Assets\VRTK\Source\Scripts\Internal\Shaders\Unlit_TransparentColor.shader" />
     <None Include="Assets\SteamVR\Resources\SteamVR_ColorOut.shader" />
+    <None Include="Assets\HighlightingSystem\Resources\HighlightingStencilTransparentZ.shader" />
     <None Include="Assets\SteamVR\InteractionSystem\Core\Shaders\SeeThru.shader" />
     <None Include="Assets\Paint in 3D\Examples\Shaders\P3D UV2.shader" />
     <None Include="Assets\SteamVR\InteractionSystem\Readme_InteractionSystem.txt" />
