@@ -30,7 +30,7 @@ public class RightHand_Guide : MonoBehaviourSingle<RightHand_Guide>
     {
         //print(Vector3.Distance(mRightHand.transform.position, mHead.transform.position));
 
-        if (mIsLighting && mHead != null && Vector3.Distance(mRightHand.transform.position, mHead.transform.position) < 1.5f)
+        if (mIsLighting && mHead != null && Vector3.Distance(mRightHand.transform.position, mHead.transform.position) < 3f)
         {
             int stepId = NumRecGuideManager.GetInstance().GetCurStep();
             if (stepId == 2)

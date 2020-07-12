@@ -29,7 +29,7 @@ public class WriteLines : MonoBehaviour
     private bool ClearedPlayed = false;
     public UnityEvent PlayMoveToStelaMusic;
     private bool MoveToStelaPlayed = false;
-
+    private GraspState changeIk;
 
 
     private void Start()
@@ -51,7 +51,7 @@ public class WriteLines : MonoBehaviour
         }
         //ActiveWriteLine();
         //StartCoroutine("ChangeMatContour");
-
+        changeIk = GetComponentInParent<GraspState>();
     }
    
 
@@ -129,6 +129,7 @@ public class WriteLines : MonoBehaviour
         {
             //print("Invoke PlayMoveToStelaMusic");
             PlayMoveToStelaMusic.Invoke();
+            changeIk.changeIK(false);
             isClear = false;
             isMoveToTela = true;
         }

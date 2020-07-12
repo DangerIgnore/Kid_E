@@ -76,6 +76,7 @@
     <Compile Include="Assets\GameMain\Scripts\GestureTest.cs" />
     <Compile Include="Assets\GameMain\Scripts\GraspState.cs" />
     <Compile Include="Assets\GameMain\Scripts\MiniMapScripts\MiniMapManager.cs" />
+    <Compile Include="Assets\GameMain\Scripts\OneToStelaColl.cs" />
     <Compile Include="Assets\GameMain\Scripts\Procedure\ProcedureBoot.cs" />
     <Compile Include="Assets\GameMain\Scripts\Procedure\ProcedureLoadDataModel.cs" />
     <Compile Include="Assets\GameMain\Scripts\Procedure\ProcedureNumRecGuide.cs" />
@@ -88,7 +89,10 @@
     <Compile Include="Assets\GameMain\Scripts\RecognizeNumModule\NumRecGuideManager\NumRecGuideManager.cs" />
     <Compile Include="Assets\GameMain\Scripts\RecognizeNumModule\NumRecGuideManager\NumRecGuideStepInfo.cs" />
     <Compile Include="Assets\GameMain\Scripts\RecognizeNumModule\NumRecGuideManager\RightHand_Guide.cs" />
+    <Compile Include="Assets\GameMain\Scripts\RecognizeNumModule\NumRecGuideManager\StelaMusicCtrl.cs" />
     <Compile Include="Assets\GameMain\Scripts\RecognizeNumModule\NumRecGuideManager\StepEvent.cs" />
+    <Compile Include="Assets\GameMain\Scripts\TwoStelaShowPlace.cs" />
+    <Compile Include="Assets\GameMain\Scripts\TwoToStelaColl.cs" />
     <Compile Include="Assets\GameMain\Scripts\Utility\AssetUtility.cs" />
     <Compile Include="Assets\GameMain\Scripts\WriteLines.cs" />
     <Compile Include="Assets\HighlightingSystem\Scripts\HighlightableObject.cs" />
